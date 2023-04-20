@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Ilias",
+        "age": "21",
+        "email": "ilias@gmail.com",
+        "filename": "student.json",
+        "group_name": "python",
+        "faculty": "py28"
+    },
+    {
+        "name": "Ilias",
+        "age": "21",
+        "email": "ilias@gmail.com",
+        "filename": "student.json",
+        "group_name": "py28",
+        "faculty": "python"
+    },
+    {
+        "name": "Ilias",
+        "age": "21",
+        "email": "ilias@gmail.com",
+        "filename": "student.json",
+        "group_name": "py28",
+        "faculty": "python"
+    },
+    {
+        "name": "Ilias",
+        "age": "21",
+        "email": "ilias@gmail.com",
+        "filename": "student.json",
+        "group_name": "py28",
+        "faculty": "python"
+    }
+]

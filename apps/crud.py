@@ -1,38 +1,35 @@
-from models import Person, Teacher, Student, Group
+import json
 
-
-def crud():
-    global group
-    choose = input('Выберите что хотите добавить (1: Группы, 2: Учитель, 3: Студенты, 4: Получить информацию):')
+class FileMixin:
+    def __init__(self, filename) -> None:
+        self.filename = filename
     
-    if int(choose) == 1:
-        group_name = input("Введите название группу: ")
-        group = Group(group_name)
+    def write(self, data):
+        with open(f"/home/tima/Desktop/projects_for_students/Course/db/{self.filename}", "w") as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
     
-    elif int(choose) == 2:
-        name = input("Введите имя: ")
-        age = input("Введите возраст: ")
-        email = input("Введите email: ")
-        position = input("Введите позицию: ")
-        department = input("Введите кафедру: ")
-        teacher = Teacher(name, age, email, position, department)
-        group.add_teacher(teacher)
-    
-    elif int(choose) == 3:
-        name = input("Введите имя: ")
-        age = input("Введите возраст: ")
-        email = input("Введите email: ")
-        faculty = input("Введите факультет: ")
-        group_name = input("Введите группу: ")
-        student = Student(name, age, email, group_name, faculty)
-        group.add_student(student)
-    elif int(choose) == 4:
+    def read(self):
         try:
-            group.get_info()
-        except:
-            print('Такой группы нету')
+            with open(f"/home/tima/Desktop/projects_for_students/Course/db/{self.filename}", "r") as file:
+                data = json.load(file)
+                return data
+        except FileNotFoundError:
+            return []
+        
+class CRUDmixin:
+    def create(self, obj):
+        data = self.read()
+        data.append(obj.__dict__)
+        self.write(data)
     
+    def read_all(self):
+        return self.read()
     
-    crud()
+    def update(self, key, value, new_data):
+        data = self.read()
+        for obj in data:
+            if obj[key] == value:
+                obj[new_data["key"]] = new_data['value']
+        self.write(data)
 
-crud()
+
